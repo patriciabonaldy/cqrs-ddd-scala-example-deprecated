@@ -7,7 +7,7 @@ import tv.codely.shared.infrastructure.unit.UnitTestCase
 import tv.codely.mooc.shared.infrastructure.marshaller.DomainEventsMarshaller.MessageMarshaller
 
 final class UserRegistrarShould extends UnitTestCase with UserRepositoryMock with MessagePublisherMock {
-  private val registrar = new UserRegistrar(repository, messagePublisher)
+  private val registrar = new UserRegistrar(repository, Seq(messagePublisher) )
 
   "register a user" in {
     val user           = UserMother.random

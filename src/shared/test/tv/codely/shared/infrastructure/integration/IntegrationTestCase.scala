@@ -23,6 +23,6 @@ trait IntegrationTestCase extends UnitTestCase {
 
   protected val doobieDbConnection: DoobieDbConnection         = sharedDependencies.doobieDbConnection
   protected val rabbitMqChannelFactory: RabbitMqChannelFactory = new RabbitMqChannelFactory(publisherConfig)
-  protected val messagePublisher: MessagePublisher             = sharedDependencies.messagePublisher
+  protected val messagePublisher: Seq[MessagePublisher]        = Seq(sharedDependencies.messagePublisher)
   protected val logger: Logger                                 = sharedDependencies.logger
 }

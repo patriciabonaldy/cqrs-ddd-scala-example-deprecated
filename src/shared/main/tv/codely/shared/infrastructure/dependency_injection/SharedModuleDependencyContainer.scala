@@ -1,7 +1,6 @@
 package tv.codely.shared.infrastructure.dependency_injection
 
 import scala.concurrent.ExecutionContext
-
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import tv.codely.shared.domain.bus.MessagePublisher
@@ -9,6 +8,7 @@ import tv.codely.shared.domain.logger.Logger
 import tv.codely.shared.infrastructure.bus.rabbitmq.{RabbitMqChannelFactory, RabbitMqConfig, RabbitMqMessagePublisher}
 import tv.codely.shared.infrastructure.doobie.{DoobieDbConnection, JdbcConfig}
 import tv.codely.shared.infrastructure.logger.ScalaLoggingLogger
+import tv.codely.shared.infrastructure.tweet.TwitterMessagePublisher
 
 final class SharedModuleDependencyContainer(
     actorSystemName: String,
@@ -23,6 +23,7 @@ final class SharedModuleDependencyContainer(
 
   private val rabbitMqChannelFactory     = new RabbitMqChannelFactory(publisherConfig)
   val messagePublisher: MessagePublisher = new RabbitMqMessagePublisher(rabbitMqChannelFactory)
+  val twitterMessagePublisher: MessagePublisher = new TwitterMessagePublisher()
 
   val logger: Logger = new ScalaLoggingLogger
 }

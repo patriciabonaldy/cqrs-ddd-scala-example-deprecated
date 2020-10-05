@@ -11,7 +11,7 @@ import tv.codely.shared.domain.bus.MessagePublisher
 
 final class UserModuleDependencyContainer(
     doobieDbConnection: DoobieDbConnection,
-    messagePublisher: MessagePublisher
+    messagePublisher: Seq[MessagePublisher]
 )(implicit executionContext: ExecutionContext) {
   val repository: UserRepository = new DoobieMySqlUserRepository(doobieDbConnection)
 

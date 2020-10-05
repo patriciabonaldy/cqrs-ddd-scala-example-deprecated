@@ -32,8 +32,8 @@ object MoocApiApp {
     implicit val executionContext: ExecutionContext = sharedDependencies.executionContext
 
     val container = new EntryPointDependencyContainer(
-      new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection, sharedDependencies.messagePublisher),
-      new VideoModuleDependencyContainer(sharedDependencies.doobieDbConnection, sharedDependencies.messagePublisher)
+      new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection, Seq(sharedDependencies.messagePublisher) ),
+      new VideoModuleDependencyContainer(sharedDependencies.doobieDbConnection, Seq(sharedDependencies.messagePublisher) )
     )
 
     val routes = new Routes(container)

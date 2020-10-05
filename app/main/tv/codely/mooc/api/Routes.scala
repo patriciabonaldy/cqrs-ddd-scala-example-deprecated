@@ -27,7 +27,7 @@ final class Routes(container: EntryPointDependencyContainer) {
       }
     }
 
-  private val video = get {
+  private val videos = get {
     path("videos")(container.videoGetController.get())
   } ~
     post {
@@ -44,7 +44,19 @@ final class Routes(container: EntryPointDependencyContainer) {
       }
     }
 
-  val all: Route = status ~ user ~ video
+
+  private val video = put {
+    path("video") {
+      jsonBody { body =>
+        container.videoPostController.updateTitle(
+          body("id").convertTo[String],
+          body("title").convertTo[String]
+        )
+      }
+    }
+  }
+
+  val all: Route = status ~ user ~ video ~ videos
 
   private def jsonBody(handler: Map[String, JsValue] => Route): Route =
     entity(as[JsValue])(json => handler(json.asJsObject.fields))

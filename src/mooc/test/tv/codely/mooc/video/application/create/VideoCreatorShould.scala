@@ -7,7 +7,7 @@ import tv.codely.shared.infrastructure.rabbitmq.MessagePublisherMock
 import tv.codely.shared.infrastructure.unit.UnitTestCase
 
 final class VideoCreatorShould extends UnitTestCase with VideoRepositoryMock with MessagePublisherMock {
-  private val creator = new VideoCreator(repository, messagePublisher)
+  private val creator = new VideoCreator(repository, Seq(messagePublisher) )
 
   "save a video" in {
     val video        = VideoMother.random
